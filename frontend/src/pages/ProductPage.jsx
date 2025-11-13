@@ -8,31 +8,68 @@ export default function ProductPage() {
   const [product, setProduct] = useState(null);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [selectedPlanIndex, setSelectedPlanIndex] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [variantLoading, setVariantLoading] = useState(false);
 
+  // useEffect(() => {
+  //   setLoading(true);
+  //   api
+  //     .get(`/api/products/${slug}`)
+  //     .then((res) => {
+  //       setProduct(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //      setLoading(false));
+  //     });
+  // }, [slug]);
   useEffect(() => {
+    setLoading(true);
+
     api
       .get(`/api/products/${slug}`)
       .then((res) => {
         setProduct(res.data);
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, [slug]);
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-600"></div>
+      </div>
+    );
+  }
 
   if (!product) return <div className="p-6">Loading...</div>;
 
   const variant = product.variants[selectedVariantIndex];
+  const handleVariantChange = (index) => {
+    setVariantLoading(true);
+
+    setSelectedVariantIndex(product.variants[index]);
+
+    setTimeout(() => {
+      setVariantLoading(false);
+    }, 400); // 400ms smooth delay
+  };
 
   return (
     <main className="container mx-auto p-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="col-span-1">
-          <img
-            src={variant.images[0]}
-            alt={product.name}
-            className="w-full object-contain"
-          />
+          {variantLoading ? (
+            <div className="flex items-center justify-center h-64 w-full">
+              <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-indigo-600"></div>
+            </div>
+          ) : (
+            <img
+              src={variant.images[0]}
+              alt={product.name}
+              className="w-full object-contain"
+            />
+          )}
         </div>
         <div className="col-span-2">
           <h1 className="text-2xl font-bold">{product.name}</h1>
