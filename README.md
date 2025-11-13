@@ -41,10 +41,4 @@ Example response: see API output in the assignment.
 ## How EMI is computed
 Monthly EMI is calculated using the standard amortization formula. For 0% interest, monthly = price / months.
 
-## Demo video
-Record 2–5 minutes:
-- Show server running + seed step
-- Show API output in Postman/browser
-- Show frontend: product list -> product page -> select EMI -> proceed button
-- Mention tech stack and deployment links
 
