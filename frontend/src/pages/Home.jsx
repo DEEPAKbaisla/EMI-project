@@ -5,13 +5,7 @@ import ProductCard from '../components/ProductCard';
 export default function Home() {
   const [products, setProducts] = useState([]);
 
-//   useEffect(() => {
-//     api.get('/api/products').then(res => {
-//       setProducts(res.data);
-//     }).catch(err => {
-//       console.error(err);
-//     });
-//   }, []);
+
 useEffect(() => {
   api.get('/api/products')
     .then(res => {
