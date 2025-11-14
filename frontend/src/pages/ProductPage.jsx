@@ -11,18 +11,7 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
   const [variantLoading, setVariantLoading] = useState(false);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   api
-  //     .get(`/api/products/${slug}`)
-  //     .then((res) => {
-  //       setProduct(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //      setLoading(false));
-  //     });
-  // }, [slug]);
+
   useEffect(() => {
     setLoading(true);
 
